@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CSV Clean</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./FileServer.js"></script>
+    <script src="./generate.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>CSV Clean</h1>
+        <p>Importe seu CSV e informe quais linhas manter.</p>
+      </header>
+      <form class="block" action="#">
+
+        <!-- HTML -->
+<label class="custom-file-upload">
+    <input type="file"/>
+    <div class="btn" title="Arquivo CSV">Clique aqui para upload</div>
+
+
+  </label>
+  <textarea placeholder="Aguardando upload" id="select" cols="30" rows="10"></textarea><!--Display Nonne-->
+  <textarea placeholder="Informe aqui os parametros" id="selected"></textarea>
+  <div class="col">
+    Coluna: 
+    <input min="1" type="number" name="coluna" id="coluna">
+  </div>
+  
+
+        <button onclick="gerar()">Download File</button>
+
+        
+      </form>
+    </div>
+    
+  </body>
+
+  <script>
+    const input = document.querySelector('input[type="file"]')
+
+    input.addEventListener('change', function(e) {
+        console.log(input.files)
+        const reader= new FileReader()
+        reader.onload = function(){
+            //console.log(reader.result)
+
+            var xml = reader.result
+
+            document.getElementById('select').value = xml
+            console.log(xml.includes('\n'));
+                 }
+
+        reader.readAsText(input.files[0])
+    }, false)
+</script>
+
+</html>
